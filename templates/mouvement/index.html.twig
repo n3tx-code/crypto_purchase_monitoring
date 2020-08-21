@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crypto List{% endblock %}
+
+{% block body %}
+    <h1 class="text-center mt-3 mb-3">
+        Crypto
+    </h1>
+    <div class="row">
+        <div class="col-md-9">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Crypto</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Comment</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for mouvement in mouvements %}
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-3">
+            <h3 class="text-center">Result</h3>
+        </div>
+    </div>
+    <div class="row">
+        {% for crypto in cryptos %}
+            <div class="col-3">
+                <h4 class="text-center">{{ crypto.Title }}</h4>
+            </div>
+        {% endfor %}
+        <div class="col-3">
+            <a href="{{ path('crypto_add') }}" class="btn btn-primary btn-block">Add a crypto</a>
+        </div>
+    </div>
+{% endblock %}
