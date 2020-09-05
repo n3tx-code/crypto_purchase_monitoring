@@ -23,7 +23,32 @@ class MouvementController extends AbstractController
     {
         $mouvements = $mouvementRepository->findAll();
         $cryptos = $cryptoRepository->findAll();
+
+        $totalInvest = 0;
+        foreach ($mouvements as $mouvement) {
+            $totalInvest += floatval($mouvement->getAmount());
+        }
+
+        $currentTotal = 0;
+        foreach ($cryptos as $crypto) {
+            $currentTotal += floatval($crypto->getCurrentTotal());
+        }
+
+        $evolution = [];
+        $evolution['benefit'] = $currentTotal - $totalInvest;
+        $pourcent = round((($currentTotal - $totalInvest) / $currentTotal) * 100, 2);
+        $evolution['pourcent'] = $pourcent;
+        if ($evolution['benefit'] > 0) {
+            $evolution['color'] = "rgba(40,167,69,0." . round($pourcent) . ")";
+        } else {
+            $evolution['color'] = "rgba(220,53,69,0." . round($pourcent) . ")";
+        }
+
+
         return $this->render('mouvement/index.html.twig', [
+            'evolution' => $evolution,
+            'totalInvest' => $totalInvest,
+            'currentTotal' => $currentTotal,
             'mouvements' => $mouvements,
             'cryptos' => $cryptos,
         ]);

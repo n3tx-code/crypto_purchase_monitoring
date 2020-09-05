@@ -9,3 +9,10 @@
     left: 20px;
     top: 20px;
 }
+
+#home-result {
+    padding: 20px;
+    border-radius: 7px;
+    position: fixed;
+    right: 35px;
+}

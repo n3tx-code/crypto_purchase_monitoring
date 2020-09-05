@@ -39,8 +39,13 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-3">
-            <h3 class="text-center">Result</h3>
+        <div class="col-md-3 text-center" id="home-result"
+             style="background-color: {{ evolution['color'] }};">
+            <h3>Result</h3>
+            <h5>Total invest : <strong>{{ totalInvest }} €</strong></h5>
+            <h5>Current total : <strong>{{ currentTotal }} €</strong></h5>
+            <h5>Benefit : <strong>{{ evolution['benefit'] }} €</strong></h5>
+            <h5>Evolution : <strong>{{ evolution['pourcent'] }} %</strong></h5>
         </div>
     </div>
     <div class="row">
@@ -55,4 +60,13 @@
             <a href="{{ path('crypto_add') }}" class="btn btn-primary btn-block">Add a crypto</a>
         </div>
     </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script type='text/javascript' src="{{ asset('js/tinycolor.js') }}"></script>
+    <script type='text/javascript'>
+        if (tinycolor($("#home-result").css("background-color")).isDark()) {
+            $("#home-result").css("color", "#fff");
+        }
+    </script>
 {% endblock %}
