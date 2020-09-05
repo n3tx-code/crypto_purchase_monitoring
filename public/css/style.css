@@ -3,3 +3,9 @@
     margin-bottom: 32px;
     border-radius: 5px;
 }
+
+#home {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}

@@ -21,11 +21,19 @@
                 <tbody>
                 {% for mouvement in mouvements %}
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
+                        <th scope="row">{{ mouvement.crypto.shortcode }}</th>
+                        <td>{{ mouvement.quantity }}</td>
+                        <td>{{ mouvement.amount }}</td>
+                        <td>{{ mouvement.dateMade|date("d/m/Y") }}</td>
+                        {% if mouvement.cashback %}
+                            <td>Cashback</td>
+                        {% elseif mouvement.brave %}
+                            <td>Cashback</td>
+                        {% elseif mouvement.earn %}
+                            <td>Earning profit</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -38,7 +46,9 @@
     <div class="row">
         {% for crypto in cryptos %}
             <div class="col-3">
-                <h4 class="text-center">{{ crypto.Title }}</h4>
+                <a href="{{ path('crypto_detail', {shortcode: crypto.shortcode}) }}"><h4
+                            class="text-center">{{ crypto.Title }}</h4>
+                </a>
             </div>
         {% endfor %}
         <div class="col-3">

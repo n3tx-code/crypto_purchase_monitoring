@@ -38,6 +38,11 @@ class Crypto
      */
     private $shortcode;
 
+    /**
+     * @ORM\Column(type="float", options={"default" : 0})
+     */
+    private $currentTotal;
+
     public function __construct()
     {
         $this->mouvements = new ArrayCollection();
@@ -99,6 +104,18 @@ class Crypto
     public function setShortcode(string $shortcode): self
     {
         $this->shortcode = $shortcode;
+
+        return $this;
+    }
+
+    public function getCurrentTotal(): ?float
+    {
+        return $this->currentTotal;
+    }
+
+    public function setCurrentTotal(float $currentTotal): self
+    {
+        $this->currentTotal = $currentTotal;
 
         return $this;
     }

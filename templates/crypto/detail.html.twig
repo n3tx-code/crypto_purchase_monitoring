@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ crypto.title }} {% endblock %}
+
+{% block body %}
+    <h1 class="text-center mt-3 mb-3">{{ crypto.title }}</h1>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">% of {{ crypto.shortcode }}</th>
+                    <th scope="col">Buying price</th>
+                    <th scope="col">Buying date</th>
+                    <th scope="col">Actual value</th>
+                    <th scope="col">Evolution</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for mouvement in crypto.mouvements %}
+                    <tr>
+                        <th scope="row">{{ mouvement.quantity }}</th>
+                        <td>TODO</td>
+                        <td>{{ mouvement.amount }}</td>
+                        <td>{{ mouvement.getDateMade().format("d/m/Y") }}</td>
+                        <td>TODO</td>
+                        <td>TODO</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row text-center mt-3">
+        <div class="col-md-6">
+            Quantity : <br/>
+            Total invest : <br/>
+        </div>
+        <div class="col-md-6">
+            Profit : <br/>
+            Evolution :
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-md-6 offset-md-3">
+            <strong>Current total :</strong>
+            <form action="{{ path('crypto_current_total_update', {shortcode: crypto.shortcode}) }}" method="post"
+                  class="input-group mb-3 mt-3">
+                <input type="hidden" name="_token" value="{{ csrf_token('currentTotalUpdate'~crypto.shortcode) }}">
+                <input type="text" class="form-control" placeholder="Current total" aria-label="Current total"
+                       value="{{ crypto.currentTotal }}"
+                       name="currentTotal"
+                       aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-success" type="submit" id="button-addon2">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <a href="{{ path('mouvement_add', {shortcode: crypto.shortcode}) }}" class="btn btn-primary btn-block
+            mt-3">Add mouvement</a>
+        </div>
+    </div>
+{% endblock %}
