@@ -65,7 +65,8 @@
 {% block javascripts %}
     <script type='text/javascript' src="{{ asset('js/tinycolor.js') }}"></script>
     <script type='text/javascript'>
-        if (tinycolor($("#home-result").css("background-color")).isDark()) {
+        var alpha = parseFloat($("#home-result").css("background-color").split(',')[3]);
+        if (tinycolor($("#home-result").css("background-color")).isDark() && alpha >= 0.3) {
             $("#home-result").css("color", "#fff");
         }
     </script>

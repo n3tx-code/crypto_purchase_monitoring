@@ -69,7 +69,7 @@
     <script type='text/javascript' src="{{ asset('js/tinycolor.js') }}"></script>
     <script type='text/javascript'>
         var alpha = parseFloat($("#crypto-evolution").css("background-color").split(',')[3]);
-        if (tinycolor($("#crypto-evolution").css("background-color")).isDark() && alpha > 0.2) {
+        if (tinycolor($("#crypto-evolution").css("background-color")).isDark() && alpha >= 0.3) {
             $("#crypto-evolution").css("color", "#fff");
         }
     </script>
