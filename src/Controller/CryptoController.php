@@ -50,7 +50,17 @@ class CryptoController extends AbstractController
         if (is_null($crypto)) {
             return $this->render('error/notFound.html.twig', ['entity' => 'Crypto']);
         }
-        return $this->render('crypto/detail.html.twig', ['crypto' => $crypto]);
+
+        if ($crypto->getBenefit() > 0) {
+            $evolutionColor = "rgba(40,167,69,0." . round($crypto->getPourcentEvolution() / 10) . ")";
+        } else {
+            $evolutionColor = "rgba(220,53,69,0." . round($crypto->getPourcentEvolution() / 10) . ")";
+        }
+
+        return $this->render('crypto/detail.html.twig', [
+            'crypto' => $crypto,
+            'evolutionColor' => $evolutionColor
+        ]);
     }
 
     /**

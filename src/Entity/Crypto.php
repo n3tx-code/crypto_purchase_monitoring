@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CryptoRepository;
+use App\Repository\MouvementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -118,5 +119,40 @@ class Crypto
         $this->currentTotal = $currentTotal;
 
         return $this;
+    }
+
+    public function getQuantity()
+    {
+        $quantity = 0;
+
+        $mvts = $this->getMouvements();
+        foreach ($mvts as $mouvement) {
+            $quantity += $mouvement->getQuantity();
+        }
+
+        return $quantity;
+    }
+
+    public function getTotalInvest()
+    {
+        $totalInvest = 0;
+
+        $mvts = $this->getMouvements();
+        foreach ($mvts as $mouvement) {
+            $totalInvest += $mouvement->getAmount();
+        }
+
+        return $totalInvest;
+    }
+
+    public function getBenefit()
+    {
+        return $this->currentTotal - $this->getTotalInvest();
+    }
+
+    public function getPourcentEvolution()
+    {
+        $pourcent = round((($this->currentTotal - $this->getTotalInvest()) / $this->currentTotal) * 100, 2);
+        return $pourcent;
     }
 }

@@ -34,12 +34,12 @@
     </div>
     <div class="row text-center mt-3">
         <div class="col-md-6">
-            Quantity : <br/>
-            Total invest : <br/>
+            Quantity : {{ crypto.quantity }}<br/>
+            Total invest : {{ crypto.totalInvest }} €<br/>
         </div>
-        <div class="col-md-6">
-            Profit : <br/>
-            Evolution :
+        <div class="col-md-2 offset-md-2" id="crypto-evolution" style="background-color: {{ evolutionColor }}">
+            Benefit : {{ crypto.benefit }} €<br/>
+            Evolution : {{ crypto.pourcentEvolution }} %
         </div>
     </div>
     <div class="row text-center">
@@ -64,4 +64,13 @@
             mt-3">Add mouvement</a>
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+    <script type='text/javascript' src="{{ asset('js/tinycolor.js') }}"></script>
+    <script type='text/javascript'>
+        var alpha = parseFloat($("#crypto-evolution").css("background-color").split(',')[3]);
+        if (tinycolor($("#crypto-evolution").css("background-color")).isDark() && alpha > 0.2) {
+            $("#crypto-evolution").css("color", "#fff");
+        }
+    </script>
 {% endblock %}

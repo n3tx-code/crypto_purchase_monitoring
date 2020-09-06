@@ -16,3 +16,8 @@
     position: fixed;
     right: 35px;
 }
+
+#crypto-evolution {
+    padding: 10px 0;
+    border-radius: 5px;
+}
