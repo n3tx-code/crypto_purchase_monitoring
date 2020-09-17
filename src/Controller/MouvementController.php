@@ -2,9 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Crypto;
 use App\Entity\Mouvement;
-use App\Form\CryptoType;
 use App\Form\MouvementType;
 use App\Repository\CryptoRepository;
 use App\Repository\MouvementRepository;
@@ -36,7 +34,10 @@ class MouvementController extends AbstractController
 
         $evolution = [];
         $evolution['benefit'] = $currentTotal - $totalInvest;
-        $pourcent = round((($currentTotal - $totalInvest) / $currentTotal) * 100, 2);
+        $pourcent = 0;
+        if ($currentTotal = !0) {
+            $pourcent = round((($currentTotal - $totalInvest) / $currentTotal) * 100, 2);
+        }
         $evolution['pourcent'] = $pourcent;
         if ($evolution['benefit'] > 0) {
             $evolution['color'] = "rgba(40,167,69,0." . round($pourcent) . ")";
@@ -57,8 +58,12 @@ class MouvementController extends AbstractController
     /**
      * @Route("/crypto/{shortcode}/mouvement/add", name="mouvement_add", methods={"GET", "POST"})
      */
-    public function create(Request $request, EntityManagerInterface $em, $shortcode, CryptoRepository $cryptoRepository): Response
-    {
+    public function create(
+        Request $request,
+        EntityManagerInterface $em,
+        $shortcode,
+        CryptoRepository $cryptoRepository
+    ): Response {
         $mvt = new Mouvement();
         $crypto = $cryptoRepository->findOneBy(['shortcode' => $shortcode]);
         $form = $this->createForm(MouvementType::class, $mvt);

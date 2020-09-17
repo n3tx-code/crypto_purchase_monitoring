@@ -3,12 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\CryptoRepository;
-use App\Repository\MouvementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CryptoRepository::class)
@@ -42,7 +40,7 @@ class Crypto
     /**
      * @ORM\Column(type="float", options={"default" : 0})
      */
-    private $currentTotal;
+    private $currentTotal = 0;
 
     public function __construct()
     {
@@ -152,7 +150,10 @@ class Crypto
 
     public function getPourcentEvolution()
     {
-        $pourcent = round((($this->currentTotal - $this->getTotalInvest()) / $this->currentTotal) * 100, 2);
+        $pourcent = 0;
+        if ($this->currentTotal != 0) {
+            $pourcent = round((($this->currentTotal - $this->getTotalInvest()) / $this->currentTotal) * 100, 2);
+        }
         return $pourcent;
     }
 }
