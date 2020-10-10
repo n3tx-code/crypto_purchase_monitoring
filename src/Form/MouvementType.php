@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Crypto;
 use App\Entity\Mouvement;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,7 +16,8 @@ class MouvementType extends AbstractType
             ->add('amount')
             ->add('cashback')
             ->add('brave')
-            ->add('earn');
+            ->add('earn')
+            ->add('Withdraw');
     }
 
     public function configureOptions(OptionsResolver $resolver)

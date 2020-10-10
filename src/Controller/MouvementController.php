@@ -28,7 +28,9 @@ class MouvementController extends AbstractController
 
         $totalInvest = 0;
         foreach ($mouvements as $mouvement) {
-            $totalInvest += floatval($mouvement->getAmount());
+            if ($mouvement->isInvestisement()) {
+                $totalInvest += floatval($mouvement->getAmount());
+            }
         }
 
         $currentTotal = 0;

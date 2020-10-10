@@ -53,6 +53,11 @@ class Mouvement
      */
     private $date_made;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $Withdraw;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -140,5 +145,22 @@ class Mouvement
         $this->date_made = $date_made;
 
         return $this;
+    }
+
+    public function getWithdraw(): ?bool
+    {
+        return $this->Withdraw;
+    }
+
+    public function setWithdraw(bool $Withdraw): self
+    {
+        $this->Withdraw = $Withdraw;
+
+        return $this;
+    }
+
+    public function isInvestisement(): bool
+    {
+        return !$this->getBrave() && !$this->getCashback() && !$this->getEarn() && !$this->getWithdraw();
     }
 }

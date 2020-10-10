@@ -137,7 +137,9 @@ class Crypto
 
         $mvts = $this->getMouvements();
         foreach ($mvts as $mouvement) {
-            $totalInvest += $mouvement->getAmount();
+            if ($mouvement->isInvestisement()) {
+                $totalInvest += $mouvement->getAmount();
+            }
         }
 
         return $totalInvest;
