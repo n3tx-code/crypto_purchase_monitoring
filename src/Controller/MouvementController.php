@@ -7,11 +7,15 @@ use App\Form\MouvementType;
 use App\Repository\CryptoRepository;
 use App\Repository\MouvementRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @IsGranted("ROLE_USER")
+ */
 class MouvementController extends AbstractController
 {
     /**
@@ -30,12 +34,13 @@ class MouvementController extends AbstractController
         $currentTotal = 0;
         foreach ($cryptos as $crypto) {
             $currentTotal += floatval($crypto->getCurrentTotal());
+
         }
 
         $evolution = [];
         $evolution['benefit'] = $currentTotal - $totalInvest;
         $pourcent = 0;
-        if ($currentTotal = !0) {
+        if ($currentTotal != 0) {
             $pourcent = round((($currentTotal - $totalInvest) / $currentTotal) * 100, 2);
         }
         $evolution['pourcent'] = $pourcent;
@@ -63,7 +68,8 @@ class MouvementController extends AbstractController
         EntityManagerInterface $em,
         $shortcode,
         CryptoRepository $cryptoRepository
-    ): Response {
+    ): Response
+    {
         $mvt = new Mouvement();
         $crypto = $cryptoRepository->findOneBy(['shortcode' => $shortcode]);
         $form = $this->createForm(MouvementType::class, $mvt);
