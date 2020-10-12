@@ -31,6 +31,9 @@ class MouvementController extends AbstractController
             if ($mouvement->isInvestisement()) {
                 $totalInvest += floatval($mouvement->getAmount());
             }
+            if ($mouvement->getWithdraw()) {
+                $totalInvest -= floatval($mouvement->getAmount());
+            }
         }
 
         $currentTotal = 0;
@@ -49,7 +52,7 @@ class MouvementController extends AbstractController
         if ($evolution['benefit'] > 0) {
             $evolution['color'] = "rgba(40,167,69,0." . round($pourcent) . ")";
         } else {
-            $evolution['color'] = "rgba(220,53,69,0." . round($pourcent) . ")";
+            $evolution['color'] = "rgba(220,53,69,0." . abs(round($pourcent)) . ")";
         }
 
 

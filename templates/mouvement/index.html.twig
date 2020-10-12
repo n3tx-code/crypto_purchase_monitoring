@@ -65,9 +65,22 @@
 {% block javascripts %}
     <script type='text/javascript' src="{{ asset('js/tinycolor.js') }}"></script>
     <script type='text/javascript'>
+        /* result text color */
         var alpha = parseFloat($("#home-result").css("background-color").split(',')[3]);
         if (tinycolor($("#home-result").css("background-color")).isDark() && alpha >= 0.3) {
             $("#home-result").css("color", "#fff");
+        }
+        /* hide and show table row */
+
+        for (i = 3; i < $("tbody tr").length; i++) {
+            $($("tbody tr")[i]).hide();
+        }
+        if ($("tbody tr").length > 3) {
+            $("table").after("<button type=\"button\" class=\"btn btn-primary float-right\" id=\"see-more-btn\"> See more </button>");
+            $("#see-more-btn").click(() => {
+                $("tbody tr").show();
+                $("#see-more-btn").remove();
+            })
         }
     </script>
 {% endblock %}

@@ -58,7 +58,7 @@ class CryptoController extends AbstractController
         if ($crypto->getBenefit() > 0) {
             $evolutionColor = "rgba(40,167,69,0." . round($crypto->getPourcentEvolution() / 10) . ")";
         } else {
-            $evolutionColor = "rgba(220,53,69,0." . round($crypto->getPourcentEvolution() / 10) . ")";
+            $evolutionColor = "rgba(220,53,69,0." . abs(round($crypto->getPourcentEvolution() / 10)) . ")";
         }
 
         return $this->render('crypto/detail.html.twig', [

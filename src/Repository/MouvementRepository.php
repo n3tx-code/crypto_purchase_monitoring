@@ -20,7 +20,7 @@ class MouvementRepository extends ServiceEntityRepository
 
     public function findAll()
     {
-        return $this->findBy(array(), array('date_made' => 'ASC'));
+        return $this->findBy(array(), array('date_made' => 'DESC'));
     }
 
     // /**
