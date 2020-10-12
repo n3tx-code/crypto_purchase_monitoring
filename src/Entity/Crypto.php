@@ -165,4 +165,13 @@ class Crypto
         }
         return $pourcent;
     }
+
+    public function getTextColorCssClass()
+    {
+        if ($this->getBenefit() > 0) {
+            return "text-success";
+        }
+
+        return "text-danger";
+    }
 }

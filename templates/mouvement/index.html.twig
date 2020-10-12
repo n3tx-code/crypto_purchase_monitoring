@@ -52,7 +52,7 @@
         {% for crypto in cryptos %}
             <div class="col-3">
                 <a href="{{ path('crypto_detail', {shortcode: crypto.shortcode}) }}"><h4
-                            class="text-center">{{ crypto.Title }}</h4>
+                            class="text-center {{ crypto.getTextColorCssClass }}">{{ crypto.Title }}</h4>
                 </a>
             </div>
         {% endfor %}
